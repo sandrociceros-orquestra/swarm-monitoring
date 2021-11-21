@@ -29,11 +29,11 @@ services:
         placement:
           constraints:
             - node.role == manager
-        resources:
-          limits:
-            memory: 2048M
-          reservations:
-            memory: 128M
+        # resources:
+        #   limits:
+        #     memory: 2048M
+        #   reservations:
+        #     memory: 128M
 
   node-exporter:
       image: prom/node-exporter:latest
@@ -48,11 +48,11 @@ services:
         - /etc/hostname:/etc/nodename
       deploy:
         # mode: global
-        resources:
-          limits:
-            memory: 128M
-          reservations:
-            memory: 64M
+        # resources:
+        #   limits:
+        #     memory: 128M
+        #   reservations:
+        #     memory: 64M
 
   cadvisor:
       image: google/cadvisor:latest
@@ -67,11 +67,11 @@ services:
         - 8080
       deploy:
       # mode: global
-      resources:
-        limits:
-          memory: 128M
-        reservations:
-          memory: 64M
+      # resources:
+      #   limits:
+      #     memory: 128M
+      #   reservations:
+      #     memory: 64M
 
   grafana:
       image: grafana/grafana:latest
