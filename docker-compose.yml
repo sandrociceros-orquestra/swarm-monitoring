@@ -15,8 +15,8 @@ services:
       command:
         - '--config.file=/etc/prometheus/prometheus.yml'
         - '--storage.tsdb.path=/prometheus'
-      expose:
-        - 9090
+      # expose:
+      #   - 9090
       ports:
         - 9090:9090
       links:
@@ -38,8 +38,8 @@ services:
       image: prom/node-exporter:latest
       # container_name: monitoring_node_exporter
       restart: unless-stopped
-      expose:
-        - 9100
+      # expose:
+      #   - 9100
       volumes:
         - /proc:/host/proc:ro
         - /sys:/host/sys:ro
@@ -63,8 +63,8 @@ services:
         - /sys:/sys:ro
         - /var/lib/docker/:/var/lib/docker:ro
         - /dev/disk/:/dev/disk:ro
-      expose:
-        - 8080
+      # expose:
+      #   - 8080
       deploy:
       # mode: global
       # resources:
@@ -79,8 +79,10 @@ services:
       restart: unless-stopped
       links:
         - prometheus:prometheus
-      expose:
-        - 3000
+      # expose:
+      #   - 3000
+      ports:
+        - 3000:3000
       volumes:
         - grafana:/var/lib/grafana
       environment:
