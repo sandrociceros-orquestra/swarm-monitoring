@@ -23,16 +23,16 @@ services:
         - cadvisor:cadvisor
         - node-exporter:node-exporter
       deploy:
-        # mode: replicated
+        mode: replicated
         replicas: 1
         placement:
           constraints:
             - node.role == manager
-        # resources:
-        #   limits:
-        #     memory: 2048M
-        #   reservations:
-        #     memory: 128M
+        resources:
+          limits:
+            memory: 2048M
+          reservations:
+            memory: 128M
 
   node-exporter:
       image: prom/node-exporter:latest
@@ -46,12 +46,12 @@ services:
         - /:/rootfs:ro
         - /etc/hostname:/etc/nodename
       deploy:
-        # mode: global
-        # resources:
-        #   limits:
-        #     memory: 128M
-        #   reservations:
-        #     memory: 64M
+        mode: global
+        resources:
+          limits:
+            memory: 128M
+          reservations:
+            memory: 64M
 
   cadvisor:
       image: braingamer/cadvisor-arm
