@@ -75,7 +75,7 @@ services:
 
   grafana:
       image: grafana/grafana:latest
-      container_name: monitoring_grafana
+      # container_name: monitoring_grafana
       restart: unless-stopped
       links:
         - prometheus:prometheus
