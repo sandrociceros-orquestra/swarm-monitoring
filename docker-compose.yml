@@ -54,15 +54,20 @@ services:
             memory: 64M
 
   cadvisor:
-      image: braingamer/cadvisor-arm
-      # container_name: monitoring_cadvisor
+      image: zcube/cadvisor:latest
+      # container_name: monitoring-cadvisor
+      hostname: rpi-cadvisor
+      ipc: shareable
       privileged: true
       restart: unless-stopped
+      security_opt:
+        - label=disable
       volumes:
         - /:/rootfs:ro
-        - /var/run:/var/run:rw
+        - /var/run:/var/run:ro
         - /sys:/sys:ro
         - /var/lib/docker/:/var/lib/docker:ro
+        - /dev/disk/:/dev/disk:ro
       devices:
         - /dev/kmsg
       # expose:
