@@ -13,9 +13,8 @@ services:
         - ./prometheus-config:/etc/prometheus
         - prometheus:/prometheus
       command:
-        - '-config.file=/etc/prometheus/prometheus.yml'
-        - '-storage.local.path=/prometheus'
-        - '-alertmanager.url=http://alertmanager:9093'
+        - '--config.file=/etc/prometheus/prometheus.yml'
+        - '--storage.tsdb.path=/prometheus'
       expose:
         - 9090
       ports:
@@ -55,7 +54,7 @@ services:
         #     memory: 64M
 
   cadvisor:
-      image: budry/cadvisor-arm
+      image: braingamer/cadvisor-arm
       container_name: monitoring_cadvisor
       restart: unless-stopped
       volumes:
@@ -80,6 +79,8 @@ services:
       restart: unless-stopped
       links:
         - prometheus:prometheus
+      expose:
+        - 3000
       volumes:
         - grafana:/var/lib/grafana
       environment:
