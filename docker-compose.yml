@@ -34,6 +34,8 @@ services:
 
   node-exporter:
     image: prom/node-exporter:latest
+    environment:
+      - NODE_ID={{.Node.ID}}
     # container_name: monitoring_node_exporter
     restart: unless-stopped
     volumes:
@@ -41,6 +43,8 @@ services:
       - /sys:/host/sys:ro
       - /:/rootfs:ro
       - /etc/hostname:/etc/nodename
+    command:
+      - '--collector.textfile.directory=/etc/node-exporter/'
     deploy:
       mode: global
       resources:
