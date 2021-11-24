@@ -49,6 +49,21 @@ services:
         reservations:
           memory: 64M
 
+  rpi-exporter:
+    image: carlosedp/arm_exporter
+    environment:
+      - NODE_ID={{.Node.ID}}
+    volumes:
+      - /etc/hostname:/etc/nodename:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/TZ:ro
+    command:
+      - '--collector.textfile.directory=/etc/rpi_exporter/'
+    ports:
+      - 9243:9243
+    deploy:
+      mode: global
+
   cadvisor:
     image: zcube/cadvisor:latest
     # container_name: monitoring-cadvisor
