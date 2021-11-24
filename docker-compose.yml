@@ -28,9 +28,9 @@ services:
       - 9090:9090
     configs:
       - source: node_rules
-        target: /etc/prometheus/swarm_node.rules.yml
+        target: /etc/prometheus/rules/swarm_node.rules.yml
       - source: task_rules
-        target: /etc/prometheus/swarm_task.rules.yml
+        target: /etc/prometheus/rules/swarm_task.rules.yml
     links:
       - cadvisor:cadvisor
       - node-exporter:node-exporter

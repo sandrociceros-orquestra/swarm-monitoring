@@ -11,8 +11,8 @@ global:
 
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
-  - "swarm_node.rules.yml"
-  - "swarm_task.rules.yml"
+  - "rules/swarm_node.rules.yml"
+  - "rules/swarm_task.rules.yml"
 
 alerting:
   alertmanagers:
