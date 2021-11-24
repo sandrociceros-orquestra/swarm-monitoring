@@ -1,8 +1,15 @@
-version: "3"
+version: "3.8"
 
 volumes:
   prometheus:
   grafana:
+  alertmanager:
+
+configs:
+  node_rules:
+    file: ./prometheus/rules/swarm_node.rules.yml
+  task_rules:
+    file: ./prometheus/rules/swarm_task.rules.yml
 
 services:
   prometheus:
@@ -15,8 +22,15 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
+      # - '--storage.local.target-heap-size=1073741824'
+      # - '--storage.local.retention=24h'
     ports:
       - 9090:9090
+    configs:
+      - source: node_rules
+        target: /etc/prometheus/swarm_node.rules.yml
+      - source: task_rules
+        target: /etc/prometheus/swarm_task.rules.yml
     links:
       - cadvisor:cadvisor
       - node-exporter:node-exporter
@@ -72,7 +86,6 @@ services:
     image: zcube/cadvisor:latest
     # container_name: monitoring-cadvisor
     hostname: rpi-cadvisor
-    ipc: shareable
     privileged: true
     restart: unless-stopped
     security_opt:
