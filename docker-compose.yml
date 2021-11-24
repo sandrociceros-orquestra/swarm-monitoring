@@ -93,6 +93,33 @@ services:
         reservations:
           memory: 64M
 
+  alertmanager:
+    image: prom/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--storage.path=/alertmanager'
+    volumes:
+      - alertmanager:/alertmanager
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
+
+  # unsee:
+  #   image: cloudflare/unsee
+  #   environment:
+  #     - "ALERTMANAGER_URIS=default:http://alertmanager:9093"
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+
   grafana:
     image: grafana/grafana:latest
     # container_name: monitoring_grafana
