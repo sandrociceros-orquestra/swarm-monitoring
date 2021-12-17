@@ -138,9 +138,9 @@ services:
       # - GF_SERVER_DOMAIN=myrul.com
       - GF_SMTP_ENABLED=false
       - GF_SMTP_HOST=smtp.gmail.com:587
-      - GF_SMTP_USER=myadrress@gmail.com
-      - GF_SMTP_PASSWORD=mypassword
-      - GF_SMTP_FROM_ADDRESS=myaddress@gmail.com
+      - GF_SMTP_USER=sandro.cicero@techsavvy.com.br
+      - GF_SMTP_PASSWORD=zZH_zngqp1%
+      - GF_SMTP_FROM_ADDRESS=sandro.cicero@techsavvy.com.br
     deploy:
       mode: replicated
       replicas: 1
